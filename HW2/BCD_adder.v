@@ -19,9 +19,13 @@ module bcd_adder (
 	output	[7:0]	result,
 	output			out_of_range
 );
-    reg [2:0] six; // holds number 6 
 
-    wire s1, c1;
+    wire [3:0] s1, adjust, mux_out; 
+    wire c1, c2, big_sum;
+    
+    assign c_out = c1 | c2;
+    assign adjust = c1 | (s1[3] & s1[1]) | (s1[3] & s[2]); // sum > 9 detection
+    assign mux_out = (4'b0000 & (~adjust)) | (4'b0110 & adjust); // mux output
 
     // 4 bit binary adder
     fulladd4 FA1(
@@ -32,13 +36,15 @@ module bcd_adder (
         .c_out(c1)
     );
 
+    
     // second 4 bit binary adder to add 6
     fulladd4 FA2(
-        .a(x),
-        .b(y),
-        .cin(Cin),
-        .s(s1),
-        .cout(c1)
+        .a(s1),
+        .b(mux_out),
+        .c_in(1'b0),
+        .s(result),
+        .c_out(c2)
     );
 
-    initial six = 3'b110;
+    
+endmodule
