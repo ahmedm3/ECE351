@@ -20,12 +20,18 @@ module bcd_adder (
 	output			out_of_range
 );
 
-    wire [3:0] s1, adjust, mux_out; 
-    wire c1, c2, big_sum;
+    wire [3:0] s1, s2, mux_out; 
+    wire c1, c2, adjust;
     
+    assign result = {3'b000, c_out, s2};
+    assign out_of_range = (X[3] & X[1]) | (X[3] & X[2]) | (Y[3] & Y[1]) | (Y[3] & Y[2]);
     assign c_out = c1 | c2;
-    assign adjust = c1 | (s1[3] & s1[1]) | (s1[3] & s[2]); // sum > 9 detection
-    assign mux_out = (4'b0000 & (~adjust)) | (4'b0110 & adjust); // mux output
+    assign adjust = c1 | (s1[3] & s1[1]) | (s1[3] & s1[2]); // sum > 9 detection
+    //assign mux_out = (4'b0000 & (~adjust)) | (4'b0110 & adjust); // mux output
+    assign mux_out[0] = adjust ^ adjust;
+    assign mux_out[1] = adjust;
+    assign mux_out[2] = adjust;
+    assign mux_out[3] = adjust ^ adjust;
 
     // 4 bit binary adder
     fulladd4 FA1(
@@ -42,9 +48,8 @@ module bcd_adder (
         .a(s1),
         .b(mux_out),
         .c_in(1'b0),
-        .s(result),
+        .s(s2),
         .c_out(c2)
     );
-
     
 endmodule
