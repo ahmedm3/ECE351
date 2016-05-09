@@ -73,7 +73,7 @@ module alu_design (
 		.data_out(addSub_out),		
 		.carry_out(addSub_cout)
 	);
-	 
+        /*	 
 	// Shift unit instance
 	shift_unit unit2 (
 		.data_in(A), 
@@ -147,5 +147,5 @@ module alu_design (
 	always @* begin
 		// ADD YOUR CODE HERE		
 	end
-			
+	*/		
 endmodule	
