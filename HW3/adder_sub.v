@@ -25,7 +25,7 @@ module adder_sub(A, B, sub_en, add_en, carry_in, out_en, data_out, carry_out);
 
     always @(A, B, sub_en, add_en, carry_in) begin
         if (add_en)
-            {carry_out, data_out} = A + B;
+            {carry_out, data_out} = A + B + carry_in;
         else if (sub_en) begin
             {carry_out, data_out} = A + (~B + 1);
         end // else if sub_en
