@@ -14,6 +14,7 @@
 // if the sub_en is a 1, 2s, subtraction will be performed
 // if A < B in subtraction, 2s complement will be returned
 
+
 module adder_sub(A, B, sub_en, add_en, carry_in, out_en, data_out, carry_out);
 
     input [7:0] A, B;
