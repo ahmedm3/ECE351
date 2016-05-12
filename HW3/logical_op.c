@@ -13,8 +13,20 @@ int main(int argc, char *argv[])
     int i;
 
     int value = generate_data(list, "OR");
-    
+    printf("%d", value);
     dump_data("logical_OR_data.txt", list, value);
+    value = generate_data(list, "AND");
+    dump_data("logical_AND_data.txt", list, value);
+    value = generate_data(list, "NAND");
+    dump_data("logical_NAND_data.txt", list, value);
+    value = generate_data(list, "NOR");
+    dump_data("logical_NOR_data.txt", list, value);
+    value = generate_data(list, "XNOR");
+    dump_data("logical_XNOR_data.txt", list, value);
+    value = generate_data(list, "XOR");
+    dump_data("logical_XNOR_data.txt", list, value);
+    value = generate_data(list, "NOT");
+    dump_data("logical_NOT_data.txt", list, value);
 
     
 
@@ -53,18 +65,18 @@ int generate_data(uint8_t list [], char *op)
                 list[array_index + 2] = A | B;
             else if (!strcmp(op, "AND"))
                 list[array_index + 2] = A & B;
-            else if (strcmp(op, "NAND"))
+            else if (!strcmp(op, "NAND"))
                 list[array_index + 2] = ~(A & B);
-            else if (strcmp(op, "NOR"))
+            else if (!strcmp(op, "NOR"))
                 list[array_index + 2] = ~(A | B);
-            else if (strcmp(op, "NOT"))
+            else if (!strcmp(op, "NOT")) 
                 list[array_index + 2] = ~A;
             else if (!strcmp(op, "XOR"))
                 list[array_index + 2] = A ^ B;
             else if (!strcmp(op, "XNOR"))
                 list[array_index + 2] = ~(A ^ B);
 
-            ++array_index;
+            array_index += 3;
         }
     }
     return array_index;
