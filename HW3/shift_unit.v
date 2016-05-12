@@ -3,8 +3,8 @@
 // shift unit for HW 3
 // This module shifts the operand data_in by shift_by bits to left 
 // or right. The direction is provided by dir
-// direction of 0 specifies left, 1 specifies
-// a right shift
+// direction of 0 specifies right, 1 specifies
+// a left shift
 
 module shift_unit(data_in, shift_by, op_en, dir, data_out, out_en);
 
@@ -14,10 +14,10 @@ module shift_unit(data_in, shift_by, op_en, dir, data_out, out_en);
     output reg out_en;
 
     always @* begin
-        if (dir) // if right shift
-            data_out = data_in >> shift_by;
-        else 
+        if (dir) // if left shift
             data_out = data_in << shift_by;
+        else 
+            data_out = data_in >> shift_by;
     end
 
 endmodule
