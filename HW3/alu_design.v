@@ -61,6 +61,9 @@ module alu_design (
 	reg dir; 
 	wire addSub_cout;	  	
 	wire [3:0] out_en;
+
+        // defined op_en inputs
+        localparam ADD = 4'b0000, SUB = 4'b0001, SHIFT_LEFT = 4'b0010, SHIFT_RIGHT = 4'b0011, ROTATE_LEFT = 4'b0100, ROTATE_RIGHT = 4'b0101, AND = 4'b0110, OR = 4'b0111, NOT = 4'b1000, NAND = 4'b1001, NOR = 4'b1010, XOR = 4'b1011, XNOR = 4'b1100;
 		
 	// adder_subtractor unit instance
 	adder_sub unit1 (
@@ -127,7 +130,16 @@ module alu_design (
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	always @* begin
-		// ADD YOUR CODE HERE		
+	    case (sel)
+                ADD         : op_en = 5'b00001;
+                SUB         : op_en = 5'b00010;
+                SHIFT_LEFT  : begin op_en = 5'b00100; dir = 1'b1; end
+                SHIFT_RIGHT : begin op_en = 5'b00100; dir = 1'b0; end
+                ROTATE_LEFT : begin op_en = 5'b01000; dir = 1'b1; end
+                ROTATE_RIGHT: begin op_en = 5'b01000; dir = 1'b0; end
+                AND, OR, NOT, NAND, XOR, NOR, XNOR: op_en = 5'b10000;
+                default     : op_en = 5'b00000;
+            endcase
 	end
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -145,7 +157,13 @@ module alu_design (
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	always @* begin
-		// ADD YOUR CODE HERE		
+	    case (out_en)
+                4'b0001: begin Y = addSub_out; carry_out = addSub_cout; end
+                4'b0010: Y = shift_out;
+                4'b0100: Y = rotate_out;
+                4'b1000: Y = logical_out;
+                default: Y = 8'bxxxxxxxx;
+            endcase
 	end
 endmodule	
 
