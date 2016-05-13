@@ -16,11 +16,12 @@ module rotate_unit(data_in, rotate_by, op_en, dir, data_out, out_en);
     always @* begin
         if (rotate_by > 4'b1000) // if bigger than 8
             data_out = 8'b00000000;
+        /*
         else if (dir) // left rotate
             data_out = {data_in[rotate_by - 1:0], data_in[7:rotate_by]};
         else 
             data_out = {data_in[7:rotate_by], data_in[rotate_by - 1:0]};
-        
+        */
     end // always
 endmodule
 
