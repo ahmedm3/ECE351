@@ -11,7 +11,9 @@ module shift_unit(data_in, shift_by, op_en, dir, data_out, out_en);
     input [7:0] data_in, shift_by;
     input op_en, dir;
     output reg [7:0] data_out;
-    output reg out_en;
+    output out_en;
+
+    assign out_en = op_en ? 1'b1 : 1'b0;
 
     always @* begin
         if (dir) // if left shift
