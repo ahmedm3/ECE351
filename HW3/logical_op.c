@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     value = generate_data(list, "NOT");
     dump_data("logical_NOT_data.txt", list, value);
 
-    
+    printf("\nLength of data: %d", value);    
 
     return 0;
 }

@@ -52,6 +52,7 @@ def logical_generate(op = "OR"):
                 logical_list.append(A & B)
             elif direction == "NAND":
                 logical_list.append(~(A & B))
+    print("Length of data: ", len(logical_list))
 
 
 def shift_generate(direction = "left"):
@@ -72,6 +73,7 @@ def shift_generate(direction = "left"):
                 shift_list.append(0)
 
     dump_data(direction + "_shift_data.txt", shift_list)
+    print("Length of data: ", len(shift_list))
 
 
 def rotate_generate(direction = "left"):
@@ -101,6 +103,7 @@ def rotate_generate(direction = "left"):
 
     # dump data
     dump_data(direction + "_rotate_data.txt", shift_list)
+    print("Length of data: ", len(shift_list))
 
 
 def sub_generate(args):
