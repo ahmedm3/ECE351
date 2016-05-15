@@ -8,14 +8,16 @@
 
 module tb;
 
+    localparam ARITHMETIC_LENGTH = 972, SHIFTS_LENGTH = 756, LOGICAL_LENGTH = 48;
+
     reg [7:0] A, B;
     reg [3:0] sel;
     reg carryIn;
     wire [7:0] results;
     wire carryOut;
-    reg [971: 0] adder_vects, sub_vects;
-    reg [755: 0] leftShift_vects, rightShift_vects, leftRotate_vects, rightRotate_vects;
-    reg [47: 0] AND_vects, OR_vects, NAND_vects, NOT_vects, XOR_vects, XNOR_vects, NOR_vects;
+    reg [ARITHMETIC_LENGTH - 1: 0] adder_vects, sub_vects;
+    reg [SHIFTS_LENGTH - 1: 0] leftShift_vects, rightShift_vects, leftRotate_vects, rightRotate_vects;
+    reg [LOGICAL_LENGTH - 1: 0] AND_vects, OR_vects, NAND_vects, NOT_vects, XOR_vects, XNOR_vects, NOR_vects;
     reg clk;
 
 
@@ -44,10 +46,10 @@ module tb;
     // for mac only, used in gtkwave
     initial begin
         $dumpfile("test.vcd");
-        $dumpvars(0, stimulus);
+        $dumpvars(0, tb);
     end
 
     
-        
+
 endmodule
 
