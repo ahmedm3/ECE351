@@ -8,22 +8,33 @@
 
 module tb;
 
-    localparam ARITHMETIC_LENGTH = 972, SHIFTS_LENGTH = 756, LOGICAL_LENGTH = 48;
+    localparam ARITHMETIC_LENGTH = 972, SHIFTS_LENGTH = 756, LOGICAL_LENGTH = 48, WIDTH = 8;
 
     reg [7:0] A, B;
     reg [3:0] sel;
     reg carryIn;
     wire [7:0] results;
     wire carryOut;
-    reg [ARITHMETIC_LENGTH - 1: 0] adder_vects, sub_vects;
-    reg [SHIFTS_LENGTH - 1: 0] leftShift_vects, rightShift_vects, leftRotate_vects, rightRotate_vects;
-    reg [LOGICAL_LENGTH - 1: 0] AND_vects, OR_vects, NAND_vects, NOT_vects, XOR_vects, XNOR_vects, NOR_vects;
+    reg [WIDTH: 0] adder_vects [ARITHMETIC_LENGTH - 1: 0], sub_vects  [ARITHMETIC_LENGTH - 1: 0];
+    reg [WIDTH - 1: 0]  leftShift_vects, rightShift_vects, leftRotate_vects, rightRotate_vects [SHIFTS_LENGTH - 1: 0];
+    reg [WIDTH - 1: 0] [LOGICAL_LENGTH - 1: 0] AND_vects, OR_vects, NAND_vects, NOT_vects, XOR_vects, XNOR_vects, NOR_vects;
     reg clk;
+
+
+    // instantiate ALU
+    alu_design alu_DUT (.A(A),
+                        .B(B),
+                        .carry_in(carryIn),
+                        .sel(sel),
+                        .Y(results),
+                        .carry_out(carryOut)
+    );
 
 
     // read all test data
     initial begin
         $readmemh("adder_data.txt", adder_vects); // adder data
+        /*
         $readmemh("sub_data.txt", sub_vects);     // subtraction data
         $readmemh("left_shift_data.txt", leftShift_vects); // left shift
         $readmemh("right_shift_data.txt", rightShift_vects); // right shift
@@ -36,6 +47,7 @@ module tb;
         $readmemh("logical_XOR_data.txta", XOR_vects);
         $readmemh("logical_XNOR_data.txta", XNOR_vects);
         $readmemh("logical_NOR_data.txta", NOR_vects);
+        */
     end
     
     // initialize clock
@@ -49,7 +61,16 @@ module tb;
         $dumpvars(0, tb);
     end
 
-    
+    initial #10 begin
+        A = adder_vects[21];
+        B = adder_vects[22];
+        sel = 4'b0000;
+        carryIn = 0;
+        # 2;
+        $display("result: %d, carry out: %d, expected: %d", results, carryOut, adder_vects[23]);
+
+        $finish;
+    end
 
 endmodule
 
