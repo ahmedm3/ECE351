@@ -23,13 +23,11 @@ module rotate_unit(data_in, rotate_by, op_en, dir, data_out, out_en);
         else if (dir) begin // left rotate
             for (i = 0; i < rotate_by; i = i + 1)
                 data_out = {data_out[6:0], data_out[7]};
-            //data_out = {data_in[rotate_by - 1:0], data_in[7:rotate_by]};
             i = 0;
         end
         else begin
             for (i = 0; i < rotate_by; i = i + 1)
                 data_out = {data_out[0], data_out[7:1]};
-            //data_out = {data_in[7:rotate_by], data_in[rotate_by - 1:0]};
             i = 0;
         end
         
