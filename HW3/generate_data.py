@@ -120,7 +120,8 @@ def sub_generate(args):
             B += 15
 
     print("Length of data where A > B:", len(sub_list))
-    
+
+    """
     # generate inputs where A < B
     for A in range(0, 256, 15):
         B = 255
@@ -129,9 +130,9 @@ def sub_generate(args):
             sub_list.append(B)
             sub_list.append(A - B)
             B -= 15
-    
+    """
     dump_data("sub_data.txt", sub_list)
-    print("Length of data combined:", len(sub_list))
+    # print("Length of data combined:", len(sub_list))
 
 
 def adder_generate(args):
