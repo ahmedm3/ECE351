@@ -23,8 +23,10 @@ module adder_sub(A, B, sub_en, add_en, carry_in, out_en, data_out, carry_out);
     output reg carry_out;
     output out_en;
 
+    // out_en logic
     assign out_en = add_en | sub_en ? 1'b1 : 1'b0;
 
+    // do addition or subtraction
     always @(A, B, sub_en, add_en, carry_in) begin
         if (add_en)
             {carry_out, data_out} = A + B + carry_in;
