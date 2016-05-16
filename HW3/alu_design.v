@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 	Project #1 - ECE 351 (Portland State University)
-//	Developed by Harsh Momaya
+//	Developed by Harsh Momaya and modified by Ahmed Abdulkareem
 //
 //	Project: 8 bit ALU design using Verilog HDL
 //
