@@ -24,11 +24,11 @@ int main(int argc, char *argv[])
     value = generate_data(list, "XNOR");
     dump_data("logical_XNOR_data.txt", list, value);
     value = generate_data(list, "XOR");
-    dump_data("logical_XNOR_data.txt", list, value);
+    dump_data("logical_XOR_data.txt", list, value);
     value = generate_data(list, "NOT");
     dump_data("logical_NOT_data.txt", list, value);
 
-    printf("\nLength of data: %d", value);    
+    printf("\nLength of data: %d\n", value);    
 
     return 0;
 }
