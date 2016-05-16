@@ -51,6 +51,10 @@ module stimulus;
         $dumpvars(0, stimulus);
     end
 
+    initial begin
+        $monitor($time, "\tA: %d, B: %d, carry_in: %d, sel: %d, Y: %d, carry out: %d\tFAIL = %d", A, B, carryIn, sel, results, carryOut, fail);
+    end
+
     // ***********************************************
     // test cases start here
     // ***********************************************
