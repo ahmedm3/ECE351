@@ -14,6 +14,7 @@ module rotate_unit(data_in, rotate_by, op_en, dir, data_out, out_en);
     output out_en;
     integer i;
 
+    // output enable logic
     assign out_en = op_en ? 1'b1 : 1'b0;
 
     always @* begin
