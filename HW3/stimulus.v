@@ -20,10 +20,10 @@ module stimulus;
     wire carryOut;
 
     // test vectors to read data into
-    reg [WIDTH: 0] adder_vects [ADDER_LENGTH - 1: 0]; 
-    reg [WIDTH: 0] sub_vects  [SUB_LENGTH - 1: 0];
-    reg [WIDTH - 1: 0]  leftShift_vects [SHIFTS_LENGTH - 1: 0], rightShift_vects [SHIFTS_LENGTH - 1: 0], leftRotate_vects [SHIFTS_LENGTH - 1: 0], rightRotate_vects [SHIFTS_LENGTH - 1: 0];
-    reg [WIDTH - 1: 0] AND_vects [LOGICAL_LENGTH - 1: 0], OR_vects [LOGICAL_LENGTH - 1: 0], NAND_vects [LOGICAL_LENGTH - 1: 0], NOT_vects [LOGICAL_LENGTH - 1: 0], XOR_vects [LOGICAL_LENGTH - 1: 0], XNOR_vects [LOGICAL_LENGTH - 1: 0], NOR_vects [LOGICAL_LENGTH - 1: 0];
+    reg [WIDTH: 0] adder_vects [0: ADDER_LENGTH - 1]; 
+    reg [WIDTH: 0] sub_vects  [0: SUB_LENGTH - 1];
+    reg [WIDTH - 1: 0]  leftShift_vects [0: SHIFTS_LENGTH - 1], rightShift_vects [0: SHIFTS_LENGTH - 1], leftRotate_vects [0: SHIFTS_LENGTH - 1], rightRotate_vects [0: SHIFTS_LENGTH - 1];
+    reg [WIDTH - 1: 0] AND_vects [0: LOGICAL_LENGTH - 1], OR_vects [0: LOGICAL_LENGTH - 1], NAND_vects [0: LOGICAL_LENGTH - 1], NOT_vects [0: LOGICAL_LENGTH - 1], XOR_vects [0: LOGICAL_LENGTH - 1], XNOR_vects [0: LOGICAL_LENGTH - 1], NOR_vects [0: LOGICAL_LENGTH - 1];
 
     reg fail; // will be set to 1 if a test case fails
     
