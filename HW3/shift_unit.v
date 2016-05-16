@@ -5,6 +5,7 @@
 // or right. The direction is provided by dir
 // direction of 0 specifies right, 1 specifies
 // a left shift
+// if shift_by > 8, then 0 will be returned
 
 module shift_unit(data_in, shift_by, op_en, dir, data_out, out_en);
 
@@ -13,6 +14,7 @@ module shift_unit(data_in, shift_by, op_en, dir, data_out, out_en);
     output reg [7:0] data_out;
     output out_en;
 
+    // output enable logic
     assign out_en = op_en ? 1'b1 : 1'b0;
 
     always @* begin
