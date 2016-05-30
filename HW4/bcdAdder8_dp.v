@@ -1,3 +1,8 @@
+// Ahmed Abdulkareem
+// data path module
+// ECE 351, HW4
+// 05/26/2016
+
 module bcdAdder8_dp (
     input clk, reset_n,         // system clock and reset signals. the reset signals 
                                 // is asserted low
