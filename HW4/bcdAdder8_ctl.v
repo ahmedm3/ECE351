@@ -34,10 +34,11 @@ module bcdAdder8_ctl (
     reg [1:0] curr_state, next_state;
     localparam LDA = 2'b00, LDB = 2'b01, LDCIN = 2'b10, LDRSLT = 2'b11;
 
+    initial curr_state = LDA;
 
     // reset and assigning current state
     always @(posedge clk) begin
-        if (reset_n)
+        if (!reset_n)
             curr_state = LDA;
         else
             curr_state = next_state;
@@ -68,6 +69,11 @@ module bcdAdder8_ctl (
 
     // output
     always @(*) begin
+        //load_A = 1'b0;
+        //load_B = 1'b0;
+        //load_CIN = 1'b0; 
+        //load_RSLT = 1'b0;
+        //out_mux_sel = 3'b100;
         case (curr_state)
             LDA: begin
                 if (next_btn && !out_of_range) begin
