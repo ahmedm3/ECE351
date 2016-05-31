@@ -68,7 +68,7 @@ module bcdAdder8_ctl (
     end
 
     // output
-    always @(*) begin
+    always @(curr_state, next_btn, out_of_range) begin
         //load_A = 1'b0;
         //load_B = 1'b0;
         //load_CIN = 1'b0; 
@@ -77,47 +77,47 @@ module bcdAdder8_ctl (
         case (curr_state)
             LDA: begin
                 if (next_btn && !out_of_range) begin
-                    load_A = 1'b1;
-                    load_B = 1'b0;
-                    load_CIN = 1'b0;
-                    load_RSLT = 1'b0;
-                    out_mux_sel = 3'b000;
+                    load_A <= 1'b1;
+                    load_B <= 1'b0;
+                    load_CIN <= 1'b0;
+                    load_RSLT <= 1'b0;
+                    out_mux_sel <= 3'b000;
                 end else if (out_of_range) begin
-                    load_A = 1'b1;
-                    load_B = 1'b0;
-                    load_CIN = 1'b0;
-                    load_RSLT = 1'b0; 
-                    out_mux_sel = 3'b110;
+                    load_A <= 1'b1;
+                    load_B <= 1'b0;
+                    load_CIN <= 1'b0;
+                    load_RSLT <= 1'b0; 
+                    out_mux_sel <= 3'b110;
                 end
             end
             LDB: begin
                 if (next_btn && !out_of_range) begin
-                    load_A = 1'b0;
-                    load_B = 1'b1;
-                    load_CIN = 1'b0;
-                    load_RSLT = 1'b0;
-                    out_mux_sel = 3'b001;
+                    load_A <= 1'b0;
+                    load_B <= 1'b1;
+                    load_CIN <= 1'b0;
+                    load_RSLT <= 1'b0;
+                    out_mux_sel <= 3'b001;
                 end else if (out_of_range) begin
-                    load_A = 1'b0;
-                    load_B = 1'b1;
-                    load_CIN = 1'b0;
-                    load_RSLT = 1'b0; 
-                    out_mux_sel = 3'b110;
+                    load_A <= 1'b0;
+                    load_B <= 1'b1;
+                    load_CIN <= 1'b0;
+                    load_RSLT <= 1'b0; 
+                    out_mux_sel <= 3'b110;
                 end
             end
             LDCIN: begin
-                load_A = 1'b0;
-                load_B = 1'b0;
-                load_CIN = 1'b1;
-                load_RSLT = 1'b0;
-                out_mux_sel = 3'b010;
+                load_A <= 1'b0;
+                load_B <= 1'b0;
+                load_CIN <= 1'b1;
+                load_RSLT <= 1'b0;
+                out_mux_sel <= 3'b010;
             end
             LDRSLT: begin
-                load_A = 1'b0;
-                load_B = 1'b0;
-                load_CIN = 1'b0;
-                load_RSLT = 1'b1;
-                out_mux_sel = 3'b011;
+                load_A <= 1'b0;
+                load_B <= 1'b0;
+                load_CIN <= 1'b0;
+                load_RSLT <= 1'b1;
+                out_mux_sel <= 3'b011;
             end 
         endcase // case 
     end // always
