@@ -24,7 +24,6 @@ module bcd_adder (
     wire c1, c2, adjust;
     
     assign result = {3'b000, c_out, s2};
-    //assign out_of_range = (X[3] & X[1]) | (X[3] & X[2]) | (Y[3] & Y[1]) | (Y[3] & Y[2]); // illegal input detection
     assign c_out = c1 | c2;
     assign adjust = c1 | (s1[3] & s1[1]) | (s1[3] & s1[2]); // sum > 9 detection
     assign mux_out[0] = adjust ^ adjust;
@@ -32,10 +31,10 @@ module bcd_adder (
     assign mux_out[2] = adjust;
     assign mux_out[3] = adjust ^ adjust;
 
-    initial out_of_range = 0;
+    initial out_of_range = 1'b0;
 
     always @ (X, Y) 
-        out_of_range = (X[3] & X[1]) | (X[3] & X[2]) | (Y[3] & Y[1]) | (Y[3] & Y[2]);
+        out_of_range = (X[3] & X[1]) || (X[3] & X[2]) || (Y[3] & Y[1]) || (Y[3] & Y[2]);
 
     // 4 bit binary adder
     fulladd4 FA1(
