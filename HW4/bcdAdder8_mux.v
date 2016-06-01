@@ -52,9 +52,8 @@ localparam	[4:0]
 // internal variables
 wire rslt_dig3, rslt_dig2, rslt_dig1;		// checks for the result nibbles == 0
 
-assign rslt_dig3_eq0 = (RSLT[11:8] == 4'd0);
-assign rslt_dig2_eq0 = (RSLT[7:4] == 4'd0);
-assign rslt_dig1_eq0 = (RSLT[3:0] == 4'd0);
+wire rslt_dig3_eq0 = (RSLT[11:8] == 4'd0);
+wire rslt_dig2_eq0 = (RSLT[7:4] == 4'd0);
 					
 // implement the mux using a combinational always block and
 // a case statement
