@@ -22,9 +22,10 @@ module bcdAdder8_dp (
     wire c_out_hi;
     wire c_out_lo;
     wire [15:0] results;
-    wire [1:0] out_of_ranges;
+    wire out_of_range_lo;
+    wire out_of_range_hi;
 
-    assign out_of_range = out_of_ranges[0] | out_of_ranges[1];
+    assign out_of_range = out_of_range_lo || out_of_range_hi;
 
     // instantiate the two 4-bit BCD adders
     bcd_adder BCD1(.X(A_out[3:0]),
@@ -32,16 +33,16 @@ module bcdAdder8_dp (
                    .c_in(carry_in),
                    .c_out(c_out_lo),
                    .result(results[7:0]),
-                   .out_of_range(out_of_ranges[0])
+                   .out_of_range(out_of_range_lo)
     );
     bcd_adder BCD2(.X(A_out[7:4]),
                    .Y(B_out[7:4]),
                    .c_in(c_out_lo),
                    .c_out(c_out_hi),
                    .result(results[15:8]),
-                   .out_of_range(out_of_ranges[1])
+                   .out_of_range(out_of_range_hi)
     );
-
+    
     // latching input logic
     always @(posedge clk) begin
         if (!reset_n) begin
@@ -73,4 +74,3 @@ module bcdAdder8_dp (
     end
 
 endmodule
-

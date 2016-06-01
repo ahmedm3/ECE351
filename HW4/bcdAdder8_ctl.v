@@ -39,9 +39,9 @@ module bcdAdder8_ctl (
     // reset and assigning current state
     always @(posedge clk) begin
         if (!reset_n)
-            curr_state = LDA;
+            curr_state <= LDA;
         else
-            curr_state = next_state;
+            curr_state <= next_state;
     end
 
     // state transitions
@@ -68,12 +68,7 @@ module bcdAdder8_ctl (
     end
 
     // output
-    always @(curr_state, next_btn, out_of_range) begin
-        //load_A = 1'b0;
-        //load_B = 1'b0;
-        //load_CIN = 1'b0; 
-        //load_RSLT = 1'b0;
-        //out_mux_sel = 3'b100;
+    always @(*) begin
         case (curr_state)
             LDA: begin
                 if (next_btn && !out_of_range) begin
@@ -81,14 +76,20 @@ module bcdAdder8_ctl (
                     load_B <= 1'b0;
                     load_CIN <= 1'b0;
                     load_RSLT <= 1'b0;
-                    out_mux_sel <= 3'b000;
+                    out_mux_sel <= 3'b001;
                 end else if (out_of_range) begin
                     load_A <= 1'b1;
                     load_B <= 1'b0;
                     load_CIN <= 1'b0;
                     load_RSLT <= 1'b0; 
                     out_mux_sel <= 3'b110;
-                end
+                end else begin
+                    load_A <= 1'b0;
+                    load_B <= 1'b0;
+                    load_CIN <= 1'b0;
+                    load_RSLT <= 1'b0; 
+                    out_mux_sel <= 3'b000;
+		end
             end
             LDB: begin
                 if (next_btn && !out_of_range) begin
@@ -96,30 +97,52 @@ module bcdAdder8_ctl (
                     load_B <= 1'b1;
                     load_CIN <= 1'b0;
                     load_RSLT <= 1'b0;
-                    out_mux_sel <= 3'b001;
+                    out_mux_sel <= 3'b010;
                 end else if (out_of_range) begin
                     load_A <= 1'b0;
                     load_B <= 1'b1;
                     load_CIN <= 1'b0;
                     load_RSLT <= 1'b0; 
                     out_mux_sel <= 3'b110;
-                end
+                end else begin
+                    load_A <= 1'b0;
+                    load_B <= 1'b0;
+                    load_CIN <= 1'b0;
+                    load_RSLT <= 1'b0; 
+                    out_mux_sel <= 3'b001;
+		end
+					
             end
             LDCIN: begin
-                load_A <= 1'b0;
-                load_B <= 1'b0;
-                load_CIN <= 1'b1;
-                load_RSLT <= 1'b0;
-                out_mux_sel <= 3'b010;
+                if (next_btn) begin
+                    load_A <= 1'b0;
+                    load_B <= 1'b0;
+                    load_CIN <= 1'b1;
+                    load_RSLT <= 1'b0;
+                    out_mux_sel <= 3'b011;
+                 end else begin
+                     load_A <= 1'b0;
+                     load_B <= 1'b0;
+                     load_CIN <= 1'b0;
+                     load_RSLT <= 1'b0;
+                     out_mux_sel <= 3'b010;
+                 end
             end
             LDRSLT: begin
-                load_A <= 1'b0;
-                load_B <= 1'b0;
-                load_CIN <= 1'b0;
-                load_RSLT <= 1'b1;
-                out_mux_sel <= 3'b011;
-            end 
+                if (next_btn) begin
+                    load_A <= 1'b0;
+                    load_B <= 1'b0;
+                    load_CIN <= 1'b0;
+                    load_RSLT <= 1'b0;
+                    out_mux_sel <= 3'b000;
+                 end else begin
+                     load_A <= 1'b0;
+                     load_B <= 1'b0;
+                     load_CIN <= 1'b0;
+                     load_RSLT <= 1'b1;
+                    out_mux_sel <= 3'b011;
+                 end
+            end	
         endcase // case 
     end // always
 endmodule
-
